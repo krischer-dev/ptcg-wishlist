@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon TCG Wishlist Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23fff%22 stroke=%22%23000%22 stroke-width=%225%22/><path d=%22M5 50 A45 45 0 0 1 95 50%22 fill=%22%23f00%22/><path d=%22M5 50 A45 45 0 0 0 95 50%22 fill=%22%23fff%22/><circle cx=%2250%22 cy=%2250%22 r=%2215%22 fill=%22%23fff%22 stroke=%22%23000%22 stroke-width=%223%22/><circle cx=%2250%22 cy=%2250%22 r=%228%22 fill=%22%23fff%22 stroke=%22%23000%22 stroke-width=%220%22/></svg>">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Normal App Header -->
+        <header class="app-header normal-mode-content">
+            <div class="logo-title">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokéball" class="pokeball-logo">
+                <h1>TCG Wishlist</h1>
+            </div>
+            <p class="subtitle">Curate your dream Pokémon card collection</p>
+        </header>
+
+        <!-- Main Content Area for Normal Mode -->
+        <div class="main-layout normal-mode-content">
+            <aside class="sidebar-controls">
+                <div class="control-section">
+                    <h2><i class="fas fa-search icon"></i> Filter & Sort</h2>
+                    <div class="control-group">
+                        <label for="searchInput">Search by Name (starts with) or ID (contains)</label>
+                        <input type="text" id="searchInput" placeholder="E.g., Char, a1-, Mew...">
+                    </div>
+                    <div class="control-group">
+                        <label for="setFilter">Filter by Pack</label>
+                        <select id="setFilter">
+                            <option value="all">All Packs</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="rarityFilter">Filter by Rarity</label>
+                        <select id="rarityFilter">
+                            <option value="all">All Rarities</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="sortOptions">Sort By</label>
+                        <select id="sortOptions">
+                            <option value="id-asc" selected>ID (Ascending)</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="rarity-asc">Rarity (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="wishlist-section">
+                    <h2><i class="fas fa-star icon"></i> My Wishlist <span id="wishlistCount" class="count-badge">(0)</span></h2>
+                    
+                    <div id="wishlistContainer" class="wishlist-grid">
+                        <p class="empty-message">Your wishlist is shining... but empty!</p>
+                    </div>
+                    
+                    <!-- Wishlist Action Buttons at the Bottom -->
+                    <div id="shareUrlContainer" class="share-url-container" style="display:none;">
+                        <p>Share this link with your friends:</p>
+                        <input type="text" id="shareableUrl" readonly>
+                        <button id="copyUrlBtn"><i class="fas fa-copy"></i> Copy URL</button>
+                    </div>
+                    <div class="wishlist-actions-group">
+                        <button id="exportWishlistBtn" class="wishlist-action-button export-button" disabled><i class="fas fa-share-alt"></i> Share List</button>
+                        <button id="clearWishlistBtn" class="wishlist-action-button clear-button" disabled><i class="fas fa-trash-alt"></i> Clear List</button>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="card-gallery-area">
+                <h2 class="gallery-title">Available Cards <span id="cardCount" class="count-badge">(0)</span></h2>
+                <div id="allCardsContainer" class="cards-grid">
+                    <div class="loading-shimmer">
+                        <div class="shimmer-card"></div><div class="shimmer-card"></div>
+                        <div class="shimmer-card"></div><div class="shimmer-card"></div>
+                    </div>
+                    <p class="initial-loading-message" style="display:none;">Fetching cards...</p>
+                </div>
+            </main>
+        </div>
+
+        <!-- Shared Wishlist View Area (hidden by default) -->
+        <div id="sharedWishlistView" class="shared-wishlist-view" style="display:none;">
+            <header class="app-header shared-view-header">
+                <div class="logo-title">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokéball" class="pokeball-logo">
+                    <h1>Shared Wishlist</h1>
+                </div>
+                 <p class="subtitle">Viewing a friend's curated Pokémon card wishlist!</p>
+            </header>
+            <main class="shared-cards-gallery">
+                <div id="sharedCardsContainer" class="cards-grid">
+                    <p class="loading-message-shared">Loading shared wishlist...</p>
+                </div>
+            </main>
+             <div class="shared-view-footer">
+                <a href="index.html" class="button-primary"><i class="fas fa-plus-circle"></i> Create Your Own Wishlist!</a>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <p>Pokémon TCG Wishlist App | Card data from community sources.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

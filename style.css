@@ -1,0 +1,727 @@
+:root {
+    --font-primary: 'Poppins', sans-serif;
+
+    --color-primary: #FFCB05; /* Pokemon Yellow */
+    --color-secondary: #3D7DCA; /* Pokemon Blue */
+    --color-accent: #E3350D; /* Pokemon Red */
+    
+    --color-background-light: #F6F8FA;
+    --color-background-medium: #E1E4E8;
+    --color-surface: #FFFFFF;
+    
+    --color-text-primary: #24292E;
+    --color-text-secondary: #586069;
+    --color-text-on-primary: #24292E;
+    --color-text-on-accent: #FFFFFF;
+
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+
+    --shadow-light: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-medium: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-heavy: 0 10px 30px rgba(0,0,0,0.12);
+
+    --transition-fast: 0.2s ease-out;
+    --transition-medium: 0.3s ease-out;
+}
+
+/* Reset and Base Styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background-light);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    color: var(--color-text-on-primary);
+    padding: 25px 30px;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    border-bottom: 4px solid var(--color-accent);
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.pokeball-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.app-header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-surface); /* White text on gradient */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.app-header .subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 400;
+    color: var(--color-surface);
+    opacity: 0.9;
+}
+
+/* Main Layout */
+.main-layout {
+    display: flex;
+    flex-grow: 1;
+    padding: 25px;
+    gap: 25px;
+}
+
+/* Sidebar Controls */
+.sidebar-controls {
+    flex: 0 0 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.control-section, .wishlist-section {
+    background-color: var(--color-surface);
+    padding: 20px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-light);
+}
+
+.control-section h2, .wishlist-section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+}
+
+.control-section h2 .icon, 
+.wishlist-section h2 .icon { /* Updated selector for FA icons */
+    margin-right: 10px;
+    font-size: 1em; /* Adjust as needed for FA icons */
+    width: 1.2em; /* Give some consistent width for alignment */
+    text-align: center;
+    color: var(--color-secondary); /* Match h2 color or customize */
+}
+
+
+.count-badge {
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: var(--border-radius-small);
+    margin-left: auto; 
+}
+
+.control-group {
+    margin-bottom: 18px;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.control-group input[type="text"],
+.control-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--color-background-medium);
+    border-radius: var(--border-radius-medium);
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
+    background-color: var(--color-background-light);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.control-group input[type="text"]:focus,
+.control-group select:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(61, 125, 202, 0.2);
+}
+
+
+/* Card Gallery */
+.card-gallery-area {
+    flex-grow: 1;
+    background-color: var(--color-surface);
+    padding: 25px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-light);
+    overflow-y: auto;
+}
+
+.gallery-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-background-medium);
+    display: flex;
+    align-items: center;
+}
+
+.cards-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-background-medium);
+    border-radius: var(--border-radius-medium);
+    padding: 15px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: var(--shadow-heavy);
+    z-index: 10;
+}
+
+.card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: var(--border-radius-small);
+    margin-bottom: 12px;
+    background-color: var(--color-background-light);
+    border: 1px solid var(--color-background-medium);
+    transition: transform var(--transition-medium);
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+    min-height: 2.6em;
+}
+
+.card p {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 3px;
+    line-height: 1.4;
+}
+.card p strong {
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.card-actions {
+    margin-top: auto;
+}
+
+.card button {
+    width: 100%;
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+    border: none;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: var(--font-primary);
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px; /* Increased gap for icon */
+}
+.card button i.fas { /* Styling for Font Awesome icons in card action buttons */
+    font-size: 0.9em; /* Adjust if needed */
+    /* margin-right: 5px; -- using gap on button now */
+}
+
+
+.card button:hover {
+    background-color: #2c5a99;
+    transform: translateY(-1px);
+}
+
+.card button:active {
+    transform: translateY(0px);
+}
+
+.card button.remove-btn {
+    background-color: var(--color-accent);
+}
+.card button.remove-btn:hover {
+    background-color: #c22a0a;
+}
+
+.card button.added-btn,
+.card button:disabled {
+    background-color: #B0BEC5;
+    color: #607D8B;
+    cursor: not-allowed;
+    transform: none;
+}
+/* Font Awesome Checkmark for "Added" state */
+.card button.added-btn::before {
+    font-family: "Font Awesome 5 Free"; /* FA font */
+    font-weight: 900; /* Solid icons */
+    content: "\f00c"; /* FA check icon Unicode */
+    margin-right: 6px;
+    color: #4CAF50; /* Green checkmark */
+}
+
+
+
+/* Wishlist Specifics */
+.wishlist-section {
+    position: sticky; 
+    top: 25px; 
+    max-height: calc(100vh - 50px - 70px); /* Approximate calculation */
+    display: flex; /* For vertical stacking of list and buttons */
+    flex-direction: column;
+}
+
+.wishlist-grid { /* This is the scrollable part */
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+    flex-grow: 1; /* Allows this to take up space and make the container scrollable */
+    overflow-y: auto; /* Makes the list of cards scrollable within the section */
+    padding-bottom: 10px; /* Space before action buttons if list is long */
+}
+
+
+.wishlist-grid .card { 
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    text-align: left;
+}
+.wishlist-grid .card:hover {
+    transform: translateX(3px); 
+    box-shadow: var(--shadow-medium);
+}
+.wishlist-grid .card img {
+    width: 50px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+.wishlist-grid .card .card-info {
+    margin-bottom: 0;
+    flex-grow: 1;
+    overflow: hidden; 
+}
+.wishlist-grid .card h3 {
+    font-size: 0.9rem;
+    min-height: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+.wishlist-grid .card p {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1px;
+}
+.wishlist-grid .card-actions {
+    margin-top: 0;
+    margin-left: auto; 
+    flex-shrink: 0;
+}
+.wishlist-grid .card button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    min-width: 80px; 
+}
+
+
+/* Share URL Container */
+.share-url-container {
+    margin-top: 15px; /* Space if it appears above action buttons */
+    /* margin-bottom is removed as actions-group is now below it */
+    padding: 15px;
+    background-color: var(--color-background-light);
+    border-radius: var(--border-radius-medium);
+    border: 1px solid var(--color-background-medium);
+}
+.share-url-container p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+}
+.share-url-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-background-medium);
+    border-radius: var(--border-radius-small);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    background-color: var(--color-surface);
+    font-family: 'Courier New', Courier, monospace;
+}
+.share-url-container button { /* Copy URL button */
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+    border: none;
+    border-radius: var(--border-radius-small);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex; /* For icon centering */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.share-url-container button:hover {
+    background-color: #2c5a99;
+}
+.share-url-container button i.fas {
+    font-size: 0.9em;
+}
+
+/* Wishlist Action Buttons (Share/Clear) - Positioned at the bottom */
+.wishlist-actions-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px; /* Space above the buttons, after the list/share URL */
+    padding-top: 10px; /* Ensure some padding if list is very short or share URL hidden */
+    border-top: 1px solid var(--color-background-medium); /* Visual separator */
+}
+
+.wishlist-action-button {
+    flex: 1; /* This makes them share space equally, hence same width */
+    padding: 10px 12px;
+    height: 40px; /* Explicit height for consistency */
+    border: none;
+    border-radius: var(--border-radius-medium);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), opacity var(--transition-fast);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.wishlist-action-button i.fas {
+    font-size: 0.9em;
+}
+
+.wishlist-action-button.export-button {
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
+}
+.wishlist-action-button.export-button:hover:not(:disabled) {
+    background-color: #c22a0a;
+}
+
+.wishlist-action-button.clear-button {
+    background-color: #78909C;
+    color: var(--color-surface);
+}
+.wishlist-action-button.clear-button:hover:not(:disabled) {
+    background-color: #546E7A;
+}
+
+.wishlist-action-button:disabled {
+    background-color: #CFD8DC;
+    color: #90A4AE;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* Loading and Empty States */
+.initial-loading-message,
+.empty-message {
+    grid-column: 1 / -1; 
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    padding: 40px 20px;
+    font-style: italic;
+}
+.wishlist-grid .empty-message { /* Empty message specific to wishlist grid */
+    font-size: 0.9rem;
+    padding: 20px 10px;
+    /* Ensure it's not part of the grid if the grid itself becomes empty */
+    /* This style might need to be applied to a wrapper if .wishlist-grid becomes display:none */
+}
+
+/* Loading Shimmer Effect */
+.loading-shimmer {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    width: 100%;
+    grid-column: 1 / -1;
+}
+.shimmer-card {
+    background: #e0e0e0;
+    border-radius: var(--border-radius-medium);
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite linear;
+}
+@keyframes shimmer {
+    0% { left: -150%; }
+    100% { left: 150%; }
+}
+
+
+/* Footer */
+.app-footer {
+    background-color: var(--color-text-primary);
+    color: var(--color-background-light);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+.app-footer p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Scrollbar Styling (Webkit) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-background-light);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-background-medium);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #BDBDBD;
+}
+
+
+/* Shared Wishlist View Mode */
+.shared-wishlist-view {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0;
+}
+.shared-view-header {
+    border-bottom: 4px solid var(--color-secondary);
+}
+.shared-cards-gallery {
+    padding: 25px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: var(--color-background-light);
+}
+.shared-cards-gallery .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 25px;
+}
+.shared-cards-gallery .card {
+    box-shadow: var(--shadow-medium);
+}
+.shared-cards-gallery .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+.shared-cards-gallery .card .card-actions {
+    display: none;
+}
+.shared-cards-gallery .card img {
+    max-height: 250px;
+}
+.loading-message-shared {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 1.2rem;
+    padding: 50px 20px;
+    font-style: italic;
+}
+.shared-view-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-background-medium);
+}
+.button-primary {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: var(--border-radius-medium);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    display: flex; /* For icon centering */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.button-primary:hover {
+    background-color: #e6b804;
+    transform: translateY(-2px);
+}
+.button-primary i.fas {
+    font-size: 1em;
+}
+
+
+/* Class to hide normal content when in view mode */
+body.view-mode-active .normal-mode-content {
+    display: none !important;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    .sidebar-controls {
+        flex: 0 0 auto;
+        width: 100%;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .control-section {
+        flex: 1;
+    }
+    .wishlist-section {
+        flex: 1;
+        position: static;
+        max-height: 450px; /* Increased slightly for buttons */
+    }
+    .wishlist-grid {
+         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .main-layout {
+        padding: 15px;
+        gap: 15px;
+    }
+    .sidebar-controls {
+        flex-direction: column;
+    }
+    .control-section, .wishlist-section {
+        width: 100%;
+    }
+     .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+    .card h3 { font-size: 0.95rem; }
+    .card p { font-size: 0.75rem; }
+    .card img { max-height: 180px; }
+    .wishlist-action-button { height: 38px; font-size: 0.85rem; }
+}
+
+@media (max-width: 480px) {
+    .app-header { padding: 20px 15px; }
+    .app-header h1 { font-size: 1.5rem; }
+    .app-header .subtitle { font-size: 0.8rem; }
+    .pokeball-logo { width: 30px; height: 30px; }
+
+    .sidebar-controls { gap: 15px; }
+    .control-section, .wishlist-section { padding: 15px; }
+    .control-section h2, .wishlist-section h2 { font-size: 1.1rem; margin-bottom: 15px; }
+
+    .card-gallery-area { padding: 15px; }
+    .gallery-title { font-size: 1.2rem; margin-bottom: 15px; }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+    .card { padding: 10px; }
+    .card img { max-height: 150px; }
+    .card h3 { font-size: 0.85rem; min-height: 2.4em; }
+    .card p { font-size: 0.7rem; }
+    .card button { font-size: 0.8rem; padding: 8px 10px; }
+
+    .wishlist-grid { gap: 8px; }
+    .wishlist-grid .card { padding: 8px; gap: 8px;}
+    .wishlist-grid .card img { width: 40px; height: 56px;}
+    .wishlist-grid .card h3 { font-size: 0.8rem; }
+    .wishlist-grid .card p { font-size: 0.65rem; }
+
+    .initial-loading-message, .empty-message { font-size: 0.9rem; padding: 20px 10px; }
+    .wishlist-actions-group { flex-direction: column; } /* Stack buttons on very small screens */
+    .wishlist-action-button { height: 36px; }
+}
